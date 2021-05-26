@@ -35,7 +35,7 @@ st.write("""
 
 def user_input_features(data):
 
-    No_Of_Months = st.sidebar.slider('Select No Of Months To Predict',1,12,1)
+    No_Of_Months = st.sidebar.slider('Select No Of Months To Predict',1,12,6)
 
     Game_Num = int(st.sidebar.text_input('Select A Game\'s Number From The List Below', 0))
 
@@ -51,9 +51,24 @@ def user_input_features(data):
 
 st.sidebar.header('User Input Values')
 
-df = user_input_features(data)
+form = st.sidebar.form('my_form')
+No_Of_Months = form.slider('Select No Of Months To Predict',1,12,6)
 
-st.sidebar.write(data['Name'].sort_values())
+Game_Num = int(form.text_input('Select A Game\'s Number From The List Below', 0))
+
+Game_Name = data.iloc[Game_Num].Name
+    
+data_tmp = {'Game Number': Game_Num,
+            'Game': Game_Name,
+            'Number of Months': No_Of_Months}
+df = pd.DataFrame(data_tmp, index=[0])
+
+data_1 = pd.DataFrame(data,columns = ['Name']).sort_values('Name')
+
+form.write(data_1.style.set_properties(**{'text-align': 'left'}))
+
+# Now add a submit button to the form:
+form.form_submit_button("Submit")
 
 ## Set up the output
 
