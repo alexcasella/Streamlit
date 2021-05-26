@@ -181,7 +181,10 @@ def ult_pred(game, train = nonsmooth_data, smooth_train = smooth_data, real_data
         plt.xlabel('Age (Months)')
         plt.ylabel('Average Players scaled according to Test Game')
         plt.title(str(horizon)+'-month Prediction given '+str(len(game))+'-month data')
-    
+
+        
+        st.subheader('Closest games:')
         st.write(close_games)
+        st.subheader('Here you can see the future of the selected game:')
         st.pyplot(fig)
     return pred, close_index,close_games

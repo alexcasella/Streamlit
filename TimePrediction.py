@@ -25,36 +25,30 @@ nonsmooth_data = get_values(nonsmooth)
 
 st.write("""
 
-# Joseph's magic algorithm
+# Time Prediction Algorithm
+
+Enter Brief Description Here
 
 """)
 
+
 ## Set up the sidebar
 
-# Function for the inputs
+# Form containing the inputs
 
-def user_input_features(data):
-
-    No_Of_Months = st.sidebar.slider('Select No Of Months To Predict',1,12,6)
-
-    Game_Num = int(st.sidebar.text_input('Select A Game\'s Number From The List Below', 0))
-
-    Game_Name = data.iloc[Game_Num].Name
-    
-    data = {'Game Number': Game_Num,
-            'Game': Game_Name,
-            'Number of Months': No_Of_Months}
-    features = pd.DataFrame(data, index=[0])
-    return features
+form = st.sidebar.form('my_form')
 
 # Header
 
-st.sidebar.header('User Input Values')
+form.header('User Input Values')
 
-form = st.sidebar.form('my_form')
 No_Of_Months = form.slider('Select No Of Months To Predict',1,12,6)
 
-Game_Num = int(form.text_input('Select A Game\'s Number From The List Below', 0))
+# Initalize Game_Num for the if statement
+
+Game_Num = 0
+
+Game_Num = int(form.text_input('Enter A Game Number From The List Below',3597,max_chars=4,help = 'Enter a number between 0 and ' + str(len(data)-1)))
 
 Game_Name = data.iloc[Game_Num].Name
     
@@ -94,7 +88,5 @@ smooth_subdata = smooth_data.copy()
 del smooth_subdata[data.loc[data['Name']==name].index[0]]
 
 # Print the closest three games
-
-st.subheader('Closest three games:')
 
 [pred, close_index,close_games] = ult_pred(game, train = subdata, smooth_train = smooth_subdata, real_data = real_data, horizon = months)
