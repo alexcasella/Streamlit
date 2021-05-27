@@ -5,7 +5,7 @@
 # This notebook is almost the same as the TimeSeries_Avg_UltModel notebook, but most of the base data computation is skipped by importing them.
 
 # In[3]:
-import streamlit as st
+
 
 import pandas as pd
 import numpy as np
@@ -18,9 +18,11 @@ from datetime import datetime
 # Import the SimpleExpSmoothing object
 from statsmodels.tsa.api import SimpleExpSmoothing
 
+
 # ### Load in all data from the DataPreparation notebook
 
 # In[4]:
+
 
 data = pd.read_csv('data18m.csv', index_col=0)
 smooth = pd.read_csv('Smooth_data18m_pure.csv', index_col=0)
@@ -162,29 +164,90 @@ def ult_pred(game, train = nonsmooth_data, smooth_train = smooth_data, real_data
         threshold = threshold - 0.1
         [pred, close_index] = wt_avg(game, smooth_game, train, smooth_train, threshold = threshold, horizon = horizon)
     if plot:
-        fig = plt.figure(figsize=(10,10))
+        plt.figure(figsize=(12,12))
         plt.plot(range(1,len(game)+horizon + 1), pred, 'r--', label = 'Prediction')
-        plt.plot(range(1,len(game)+1), game, 'b', label = 'Selected Game Data: Past')
+        plt.plot(range(1,len(game)+1), game, 'b', label = 'Your Game Data')
         if len(real_data) !=0:
-            plt.plot(range(len(game),len(game)+ horizon+1), real_data, 'b--', label = 'Selected Game Data: Future')
+            plt.plot(range(len(game)+1,len(game)+ horizon +1), real_data, 'b--', label = 'Your Test Data')
         if len(close_index)!=0:
             plot_range = range(min(number,len(close_index)))
-            info = ['']*min(number,len(close_index))
             for i in plot_range:
                 close_game = train[int(close_index[i][0])][:len(game)+horizon]
                 scaled_close_game = close_game * mini_scaler(close_game[:len(game)],game)
-                plt.plot(range(1,len(game)+horizon +1), scaled_close_game, label = str(i+1)+'-th closest scaled Game')
-                info[i] = [close_index[i][0], data.iloc[int(close_index[i][0])]['Name'], close_index[i][1]]
-            close_games = pd.DataFrame(info, columns = ['Game Number', 'Game', 'Weight'])
-            
+                plt.plot(range(1,len(game)+horizon +1), scaled_close_game, label = str(i+1)+'-th closest scaled Game: ' + str(data.iloc[int(close_index[i][0])]['Name']) + ' , weight = ' + str(close_index[i][1]))
+
         plt.legend(fontsize=12)
         plt.xlabel('Age (Months)')
-        plt.ylabel('Average Players per Day')
+        plt.ylabel('Average Players scaled according to Test Game')
         plt.title(str(horizon)+'-month Prediction given '+str(len(game))+'-month data')
+        plt.show()
+    return pred, close_index
 
-        
-        st.subheader('Closest games:')
-        st.write(close_games)
-        st.subheader('Here you can see the future of the selected game:')
-        st.pyplot(fig)
-    return pred, close_index,close_games
+
+# ### Imaginary Examples:
+
+# In[188]:
+
+
+game = np.linspace(100,10,15)
+[pred, close_index]=ult_pred(game, horizon = 10)
+
+
+# In[180]:
+
+
+game = np.linspace(500,1011,15)
+
+[pred, close_index]=ult_pred(game)
+
+
+# ### Real Examples in our data base:
+# Pick a game A in our data base and only use its first 12-month data. Suppose you want to use everything except game A to predict game A.
+
+# Example 1: Among Us
+
+# In[132]:
+
+
+data.loc[data['Name']=='Among Us']
+
+
+# In[145]:
+
+
+name = 'Among Us'
+
+game = nonsmooth_data[data.loc[data['Name']==name].index[0]][:12]
+real_data = nonsmooth_data[data.loc[data['Name']==name].index[0]][12:18]
+
+subdata = nonsmooth_data.copy()
+del subdata[data.loc[data['Name']==name].index[0]]
+smooth_subdata = smooth_data.copy()
+del smooth_subdata[data.loc[data['Name']==name].index[0]]
+
+[pred, close_index] = ult_pred(game, train = subdata, smooth_train = smooth_subdata, real_data = real_data)
+
+
+# Example 2: Grand Theft Auto V
+
+# In[171]:
+
+
+data.loc[data['Name']=='Grand Theft Auto V']
+
+
+# In[172]:
+
+
+name = 'Grand Theft Auto V'
+
+game = nonsmooth_data[data.loc[data['Name']==name].index[0]][:12]
+real_data = nonsmooth_data[data.loc[data['Name']==name].index[0]][12:18]
+
+subdata = nonsmooth_data.copy()
+del subdata[data.loc[data['Name']==name].index[0]]
+smooth_subdata = smooth_data.copy()
+del smooth_subdata[data.loc[data['Name']==name].index[0]]
+
+[pred, close_index] = ult_pred(game, train = subdata, smooth_train = smooth_subdata, real_data = real_data)
+
