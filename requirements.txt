@@ -4,5 +4,4 @@ pandas
 datetime
 statsmodels
 seaborn
-umap
-umap-learn
+pickle

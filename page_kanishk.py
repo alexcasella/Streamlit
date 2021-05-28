@@ -24,7 +24,13 @@ def page_kanishk():
     # Description of the algorithm
 
     st.markdown("""
-
+                This algorithm allows you to predict the number of owners of a game having the following features in its store page:
+                - PackageCount: _the number of package deals the game is part of_
+                - MovieCount: _the number of videos about the game_
+                - ScreenshoCount: _the number of screenshots of the game_
+                - AchievementCount: _the number of achievements available for the players_
+                - PriceMean: _the average between the inital and final price_ \n
+                The output is a monthly sale prediction of the game.
                 """)
 
     st.info("""
@@ -34,8 +40,8 @@ def page_kanishk():
                 - Select the ScreenshotCount (0-180)
                 - Select the AchievementCount (0-9821)
                 - Insert the PriceMean (0.5-449.99)
-                - Press Submit!
-                The algorithm returns a plot with ?.
+                - Press Submit! \n
+                The algorithm returns a plot with a monthly sale prediction of the game.
                 """)
 
 
@@ -51,9 +57,9 @@ def page_kanishk():
 
     packagecount = form.slider('Select the PackageCount',1,18,1)
     moviecount = form.slider('Select the MovieCount',0,20,3)
-    screenshotcount = int(form.text_input('Select the PackageCount',5,max_chars=3,help = 'Enter a number between 0 and 180'))
+    screenshotcount = int(form.text_input('Select the ScreenshotCount',5,max_chars=3,help = 'Enter a number between 0 and 180'))
     achievementcount = int(form.text_input('Select the AchievementCount',10,max_chars=4,help = 'Enter a number between 0 and 9821'))
-    pricemean = float(form.text_input('Select the PackageCount',9.99,max_chars=6,help = 'Enter a number between 0.5 and 449.99'))
+    pricemean = float(form.text_input('Select the PriceMean',9.99,max_chars=6,help = 'Enter a number between 0.5 and 449.99'))
 
     # Initalize Game_Num for the if statement
 

@@ -39,7 +39,7 @@ def page_introduction():
     st.info("""
             There are two main algorithms: \n
             - Time Comparison
-            - Feature Score \n
+            - Feature Score
             - Owners Prediction \n
             $←$ To start playing with the app, select an option on the 
             left sidebar.
@@ -95,7 +95,13 @@ def page_introduction():
     st.markdown("<h4 style='text-align: left;'> Developed by Kanishk </h4>", 
                 unsafe_allow_html=True)
     st.info("""
-                This algorithm allows you to predict the number of owners of the chosen game.
+                This algorithm allows you to predict the number of owners of a game having the following features in its store page:
+                - PackageCount: _the number of package deals the game is part of_
+                - MovieCount: _the number of videos about the game_
+                - ScreenshoCount: _the number of screenshots of the game_
+                - AchievementCount: _the number of achievements available for the players_
+                - PriceMean: _the average between the inital and final price_
+                The output is a monthly sale prediction of the game.
                 """)
     
     make_line()

@@ -46,6 +46,6 @@ def predict_owners(PackageCount = 1, MovieCount=3, ScreenshotCount=5, Achievemen
     ax.axis('off')
     fig.colorbar(s, ax=ax)
     s = ax.scatter(x[0, 0], x[0, 1], color='white', marker='o', s=100, facecolors='none', linewidth=2)
-    st.subheader('Here you can see the future of the selected game:')
+    st.subheader('Here you can see the future of the game:')
     st.pyplot(fig)
     return

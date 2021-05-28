@@ -25,7 +25,7 @@ def page_joseph():
 
     st.markdown("<h2 style='text-align: center;'> Welcome To </h2>", 
                     unsafe_allow_html=True)
-    st.markdown("<h1 style='text-align: center;'> The Time Prediction Algorithm </h1>", 
+    st.markdown("<h1 style='text-align: center;'> The Time Comparison Algorithm </h1>", 
                     unsafe_allow_html=True)
 
     # Description of the algorithm
