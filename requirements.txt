@@ -4,5 +4,4 @@ pandas
 datetime
 statsmodels
 seaborn
-pickle
 umap-learn
