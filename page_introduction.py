@@ -38,8 +38,9 @@ def page_introduction():
 
     st.info("""
             There are two main algorithms: \n
-            - Time Prediction
+            - Time Comparison
             - Feature Score \n
+            - Owners Prediction \n
             $←$ To start playing with the app, select an option on the 
             left sidebar.
             """)
@@ -51,15 +52,15 @@ def page_introduction():
     make_line()
 
     
-    st.markdown("<h2 style='text-align: center;'> Time Prediction </h2>", 
+    st.markdown("<h2 style='text-align: center;'> Time Comparison </h2>", 
                 unsafe_allow_html=True)
     st.markdown("<h4 style='text-align: left;'> Developed by Joseph </h4>", 
                 unsafe_allow_html=True)
     st.info("""
-                This algorithm predicts the future average number of players (per day) of the chosen game,
-                based on the first 12 months of its life.
-                Roughly speaking, this is done by making a weighted comparison of the chosen game with all other games in the
-                list that have a similar average number of players over the first 12 months.
+                This algorithm comparese the average number of players (per day) of the chosen game
+                (in the first 12 months) with all other games in the database. Based on this comparison, the algorithm
+                makes a prediction on the next few months of the chosen game.
+                Moreover, it underlines the three closest games, from which a developer can take inspiration from.
             """)
     
     make_line()
@@ -89,5 +90,14 @@ def page_introduction():
     
     make_line()
     
+    st.markdown("<h2 style='text-align: center;'> Owners Prediction </h2>", 
+                unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: left;'> Developed by Kanishk </h4>", 
+                unsafe_allow_html=True)
+    st.info("""
+                This algorithm allows you to predict the number of owners of the chosen game.
+                """)
+    
+    make_line()
     
     return

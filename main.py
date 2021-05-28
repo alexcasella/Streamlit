@@ -11,6 +11,7 @@ import streamlit as st
 from page_joseph import page_joseph
 from page_rohit import page_rohit
 from page_introduction import page_introduction
+from page_kanishk import page_kanishk
 
 # Use random seed
 import numpy as np
@@ -32,12 +33,14 @@ def main():
         page_introduction - contains page with images and brief explanations
         page_joseph - contains joseph's algorithm
         page_rohit - rohit's algorithm
+        page_kanishk - kanishk's algorithm
     """
 
     pages = {
         "Introduction": page_introduction,
-        "Time Prediction": page_joseph,
+        "Time Comparison": page_joseph,
         "Feature Score": page_rohit,
+        "Owners Prediction" : page_kanishk
     }
 
     st.sidebar.title("Main options")
