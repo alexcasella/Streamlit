@@ -4,4 +4,3 @@ pandas
 datetime
 statsmodels
 seaborn
-pickle
