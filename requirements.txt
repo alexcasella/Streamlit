@@ -5,3 +5,4 @@ datetime
 statsmodels
 seaborn
 umap
+umap.umap_
