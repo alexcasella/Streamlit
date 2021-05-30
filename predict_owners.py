@@ -22,6 +22,7 @@ PriceMean           [0.5, 449.99]
 
 def predict_owners(PackageCount = 1, MovieCount=3, ScreenshotCount=5, AchievementCount=10,  PriceMean=9.99):
     
+    plt.style.use('dark_background')
     
     x = models['umap'].transform(models['scaler'].transform(np.atleast_2d([PackageCount, MovieCount, ScreenshotCount, AchievementCount, PriceMean, 0, 0, 0]))[:, :5])
 
@@ -49,4 +50,6 @@ def predict_owners(PackageCount = 1, MovieCount=3, ScreenshotCount=5, Achievemen
     s = ax.scatter(x[0, 0], x[0, 1], color='white', marker='o', s=100, facecolors='none', linewidth=2)
     st.subheader('Here you can see the future of the game:')
     st.pyplot(fig)
+    
+    plt.style.use('default')
     return
