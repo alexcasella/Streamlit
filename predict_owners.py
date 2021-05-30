@@ -4,6 +4,7 @@ import numpy as np
 
 import streamlit as st
     
+plt.style.use('dark_background')
 
 
 with open('kanishk.model', 'rb') as f:
@@ -21,7 +22,6 @@ PriceMean           [0.5, 449.99]
 
 def predict_owners(PackageCount = 1, MovieCount=3, ScreenshotCount=5, AchievementCount=10,  PriceMean=9.99):
     
-    plt.style.use('dark_background')
     
     x = models['umap'].transform(models['scaler'].transform(np.atleast_2d([PackageCount, MovieCount, ScreenshotCount, AchievementCount, PriceMean, 0, 0, 0]))[:, :5])
 
