@@ -41,7 +41,7 @@ def page_joseph():
                 To run the algorithm: \n
                 - Choose the number of months in the future that you want to predict (1-12)
                 - Select the game you want to make the prediction about from the given list (0-4288)
-                - Press Submit!
+                - Press Submit! \n
                 The algorithm returns a plot with the prediction and the first few closest games.
                 """)
 
