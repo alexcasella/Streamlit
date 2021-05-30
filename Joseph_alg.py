@@ -177,6 +177,7 @@ def ult_pred(game, train = nonsmooth_data, smooth_train = smooth_data, real_data
                 info[i] = [close_index[i][0], data.iloc[int(close_index[i][0])]['Name'], close_index[i][1]]
             close_games = pd.DataFrame(info, columns = ['Game Number', 'Game', 'Weight'])
             
+        plt.style.use('default')
         plt.legend(fontsize=12)
         plt.xlabel('Age (Months)')
         plt.ylabel('Average Players per Day')
