@@ -20,6 +20,8 @@ from statsmodels.tsa.api import SimpleExpSmoothing
 
 # ### Load in all data from the DataPreparation notebook
 
+plt.style.use('default')
+
 # In[4]:
 
 data = pd.read_csv('data18m.csv', index_col=0)
