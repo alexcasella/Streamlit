@@ -4,7 +4,7 @@ import numpy as np
 
 import streamlit as st
     
-plt.style.use('dark_background')
+#plt.style.use('dark_background')
 
 
 with open('kanishk.model', 'rb') as f:
