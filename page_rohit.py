@@ -59,7 +59,7 @@ def page_rohit():
                 To run the algorithm: \n
                 - Choose a popularity class (1-5)
                 - Select the set of features you want to compare
-                - Press Submit!
+                - Press Submit! \n
                 The algorithm returns four plots, one for each score, with the selected features.
                 """)
 
